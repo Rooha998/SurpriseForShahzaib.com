@@ -12,132 +12,529 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Norwester&display=swap" rel="stylesheet" />
   
   <style>
-  /* Reset and base */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body, html {
-    height: 100%;
-    font-family: 'Lato', sans-serif;
-    background: radial-gradient(ellipse at bottom, #0b0000 0%, #1a0000 70%, #000000 100%);
-    color: #ff4c4c; /* bright red */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    overflow-x: hidden; /* prevent horizontal scroll */
-    position: relative;
-  }
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Lovely Birthday Surprise for Shahzaib</title>
+    <link rel="icon" type="image/png" href="icons/rose.png">
+     <!-- Google Fonts: Dancing Script and Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .heart-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff2c2c, #ff6b6b);
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .heart:before, .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff2c2c, #ff6b6b);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #ff2c2c;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 44, 44, 0.5);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 40px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            position: relative;
+            height: 350px;
+            perspective: 1000px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 44, 44, 0.3);
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-front {
+            background-color: #1a1a1a;
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #1a1a1a, #2a0a0a);
+            transform: rotateY(180deg);
+            padding: 20px;
+            overflow: auto;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .wishes-container {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 4px solid #ff2c2c;
+        }
+        
+        .wishes-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff2c2c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .wishes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .wish {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .wish:hover {
+            transform: scale(1.03);
+            background: rgba(255, 44, 44, 0.1);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 44, 44, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 44, 44, 0.8), 0 0 30px rgba(255, 44, 44, 0.6);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(45deg);
+            }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .card {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .wishes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio autoplay loop hidden>
+        <source src="music/Raabta (Kehte Hain Khuda Ne)  Agent Vinod  Shreya Ghoshal, Arijit Singh Lyrics AVS.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-  /* Starry background container */
-  .stars {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
+    <div class="heart-background" id="heartBackground"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Happy Birthday Jan 💖</h1>
+            <p class="subtitle">Today is all about you, my reason to smile</p>
+        </header>
+              <div class="gallery">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="pics/WhatsApp Image 2025-09-12 at 9.16.05 PM.jpeg" alt="Birthday celebration with festive decorations and joyful atmosphere">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">Your smile lights up my world brighter than any birthday candle ever could.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/23dc7354-5d59-4fb7-985c-3ccd6872bd72.png" alt="Elegant birthday cake with red and black decoration">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">With each year, you become more amazing. I'm so lucky to witness your journey.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ac6dcaf8-5bf3-46db-93f9-1a00b3c92e3a.png" alt="Romantic moment with red roses and candlelight">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">My love for you grows stronger with each passing day. Happy birthday, my heart.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9ca6e9a9-a061-471e-b5d2-897a2be3970e.png" alt="Celebration toast with champagne glasses in elegant setting">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">May your special day be filled with laughter, joy, and all that makes you happy.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="pics/WhatsApp Image 2025-09-12 at 9.13.50 PM (1).jpeg" alt="Beautiful birthday flowers in red and black theme">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">You are the greatest gift life has given me. Celebrating you today and always.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1ed5a28-0b5d-437e-9d67-8042e302a34b.png" alt="Starry night sky with red and black theme representing dreams">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">May all your dreams and wishes come true this year. You deserve the world.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 7 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d2d71756-9b61-4e2a-ac4f-51d2e2c64c0b.png" alt="Couple silhouette against sunset with romantic ambiance">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">Every moment with you is a treasure. Happy birthday to my favorite person.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 8 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4dfe1a1d-c60b-435c-a74f-8c84f7bfd4c9.png" alt="Birthday balloons in red and black floating towards sky">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">Your happiness means everything to me. Wishing you a day as wonderful as you are.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 9 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="pics/WhatsApp Image 2025-09-14 at 9.16.43 PM.jpeg" alt="Elegant birthday card with heartfelt message in calligraphy">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">You make every day feel like a celebration. Happy birthday to my reason to smile.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 10 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/57624e62-1d3e-42da-a85e-d718f5b56790.png" alt="Romantic dinner setting with red roses and candlelight">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">My love for you knows no bounds. Happy birthday to my everything.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 11 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="pics/WhatsApp Image 2025-09-12 at 9.13.48 PM.jpeg" alt="Beautiful birthday bouquet with red flowers and dark accents">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">You are more beautiful with each passing year. Inside and out.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 12 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce38b969-3d7e-4f96-89c0-bd1e3fbfaf91.png" alt="Celebration party with confetti and festive decorations">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">Cheers to you and all the amazing things you'll achieve this year!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 13 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="pics/WhatsApp Image 2025-09-12 at 9.13.49 PM.jpeg" alt="Final celebratory image with birthday wishes and love">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">My heart is yours today, tomorrow, and forever. Happy birthday, my love.</p>
+                    </div>
+                    
+                </div>
+            </div>
+                        
+            <!-- Card 14 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://img.freepik.com/premium-photo/beautiful-sunset-as-two-hands-form-heart-shape-against-glowing-sun-this-image-captures-love-connection-serene-setting-generative-ai_1269098-14083.jpg">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">To my love, Shahzaib khan 💕
+Every heartbeat of mine whispers your name, and today I celebrate the most precious gift I ever received—you.</p>
+                    </div>
+                    
+                </div>
+            </div>          
+            <!-- Card 15 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://thumbs.dreamstime.com/b/couple-sitting-together-watching-fireworks-fill-dark-night-sky-entering-new-year-there-were-bottles-wine-glasses-298839369.jpg">
+                    </div>
+                    <div class="card-back">
+                        <p class="message">You are not just the love of my life, you are my safe place, my happiness, and my dream come true.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <div class="wishes-container">
+            <h2 class="wishes-title">My Heartfelt Wishes For You</h2>
+            <div class="wishes">
+                <div class="wish">
+                    <p>May your birthday be filled with endless joy, laughter, and all the things that make you smile.</p>
+                </div>
+                <div class="wish">
+                    <p>I wish you a year ahead full of success in all your endeavors and dreams coming true.</p>
+                </div>
+                <div class="wish">
+                    <p>May you always feel loved, cherished, and appreciated not just today but every day.</p>
+                </div>
+                <div class="wish">
+                    <p>I wish you health and happiness that grows with each passing year.</p>
+                </div>
+                <div class="wish">
+                    <p>May our bond grow stronger and our love deeper with every birthday we celebrate together.</p>
+                </div>
+                <div class="wish">
+                    <p>I wish you moments that take your breath away and memories that warm your heart forever.</p>
+                </div>
+                <div class="wish">
+                    <p>May every step you take lead you closer to your dreams, and may happiness follow you wherever you go.</p>
+                </div>
+                 <div class="wish">
+                    <p>I wish you endless moments of peace, love, and comfort, knowing that you are deeply cherished today and always.</p>
+                </div>
+            </div>
+        </div>
 
-  .star {
-    position: absolute;
-    background: #ff4c4c;
-    border-radius: 50%;
-    opacity: 0.8;
-    box-shadow: 0 0 6px 2px #ff0000;
-    animation: twinkle 2s infinite alternate;
-  }
-  .star.small { width: 2px; height: 2px; animation-duration: 1.5s; }
-  .star.medium { width: 3px; height: 3px; animation-duration: 2.5s; }
-  .star.large { width: 4px; height: 4px; animation-duration: 3s; }
+        <!-- (Your cards and wishes content stays the same as before) -->
+        
+        <footer>
+            <p>Created with love for your special day ❤️</p>
+        </footer>
+    </div>
 
-  @keyframes twinkle {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; }
-  }
+    <script>Create floating hearts background
+        function createHearts() {
+            const heartBackground = document.getElementById('heartBackground');
+            const numberOfHearts = 25;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Random position
+                const posX = Math.random() * 100;= Math.10;
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                
+                heart.style.left = `${posX}%`;
+                heart.style.top = `${posY}%`;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                heart.style.animationDelay = `${delay}s`;
+                
+                heartBackground.appendChild(heart);
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            createHearts();
+        });
+    </script>
+</body>
+</html>
 
-  .container {
-    width: 100%;
-    max-width: 500px;
-    background: rgba(30, 0, 0, 0.85);
-    border-radius: 15px;
-    padding: 40px 20px;
-    box-shadow: 0 0 20px #ff0000;
-    position: relative;
-    z-index: 1;
-  }
-
-  h1 {
-    font-family: 'Norwester', sans-serif;
-    font-size: clamp(2rem, 6vw, 3rem); /* responsive size */
-    margin-bottom: 15px;
-    color: #ff4c4c;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 0 0 8px #ff0000;
-  }
-
-  p.subtitle {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    margin-bottom: 30px;
-    color: #ff9999;
-    text-shadow: 0 0 5px #ff4c4c;
-  }
-
-  .countdown {
-    display: flex;
-    flex-wrap: wrap; /* allow wrap on small screens */
-    justify-content: space-around;
-    font-weight: 700;
-    gap: 10px;
-  }
-
-  .countdown div {
-    flex: 1 1 100px; /* responsive boxes */
-    min-width: 90px;
-    background: #330000;
-    border-radius: 10px;
-    padding: 15px 10px;
-    box-shadow: 0 0 10px #ff0000;
-  }
-
-  .countdown div span.number {
-    display: block;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: #ff4c4c;
-    text-shadow: 0 0 6px #ff0000;
-  }
-
-  .countdown div span.label {
-    font-size: 0.9rem;
-    color: #ff9999;
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 4px #ff4c4c;
-  }
-
-  footer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #ff6666;
-    text-shadow: 0 0 3px #ff0000;
-  }
-
-  /* Extra small screen tweaks */
-  @media (max-width: 480px) {
-    .countdown {
-      flex-direction: column;
-      align-items: center;
-    }
-    .countdown div {
-      width: 100%;
-      max-width: 200px;
-    }
-  }
 </style>
 
 </head>
