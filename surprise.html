@@ -114,6 +114,37 @@
       height: 135px;
     }
   }
+  /* Responsive heart container */
+.heart-container {
+  width: 80%;          /* relative width */
+  max-width: 400px;    /* don’t exceed 400px */
+  height: auto;
+  aspect-ratio: 5 / 2; /* keep proportional height */
+  margin: 0 auto;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+/* Scale text responsively */
+.birthday-text {
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  text-align: center;
+  line-height: 1.3;
+  padding: 0 10px;
+  word-break: break-word;
+}
+
+/* Extra small screen tweaks */
+@media (max-width: 600px) {
+  .heart-container {
+    width: 70%;
+    max-width: 250px;
+    aspect-ratio: 1 / 1; /* square-ish heart for smaller screens */
+  }
+  .birthday-text {
+    font-size: clamp(1.2rem, 6vw, 2.5rem);
+  }
+}
+
 </style>
 </head>
 <body>
