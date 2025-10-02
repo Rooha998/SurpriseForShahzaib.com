@@ -6,142 +6,108 @@
 <title>My Heart’s Day</title>
 <link rel="icon" type="image/png" href="icons/heart-with-arrow.png">
 <style>
-  /* Red velvet color palette */
-  :root {
-    --red-velvet-dark: #7b0a0a;
-    --red-velvet: #b22222;
-    --red-velvet-light: #e25858;
-    --glow-red: #ff4d4d;
-  }
+/* Red velvet color palette */
+:root {
+  --red-velvet-dark: #7b0a0a;
+  --red-velvet: #b22222;
+  --red-velvet-light: #e25858;
+  --glow-red: #ff4d4d;
+}
 
-  /* Reset and base */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  body, html {
-    height: 100%;
-    overflow: hidden;
-    background: radial-gradient(ellipse at bottom, #0b0c1a 0%, #000010 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--red-velvet-light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+body, html {
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #0b0c1a 0%, #000010 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--red-velvet-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px;
+  text-align: center;
+}
 
-  /* Starry background */
-  #stars {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: transparent;
-    z-index: 0;
-  }
+/* Starry background */
+#stars, #fireworksCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  z-index: 0;
+  pointer-events: none;
+}
 
-  /* Fireworks canvas */
-  #fireworksCanvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1;
-  }
+/* Container for text and heart */
+.container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 90%;
+}
 
-  /* Container for text and heart */
-  .container {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    user-select: none;
-  }
+/* Happy Birthday text */
+.birthday-text {
+  font-size: clamp(1.5rem, 6vw, 3.5rem);
+  font-weight: 900;
+  color: var(--red-velvet);
+  text-shadow:
+    0 0 10px var(--glow-red),
+    0 0 20px var(--glow-red),
+    0 0 30px var(--red-velvet-light),
+    0 0 40px var(--red-velvet-light);
+  margin-bottom: 0.8rem;
+  font-family: 'Brush Script MT', cursive, sans-serif;
+  line-height: 1.3;
+  word-break: break-word;
+  padding: 0 5px;
+}
 
-  /* Happy Birthday text */
-  .birthday-text {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--red-velvet);
-    text-shadow:
-      0 0 10px var(--glow-red),
-      0 0 20px var(--glow-red),
-      0 0 30px var(--red-velvet-light),
-      0 0 40px var(--red-velvet-light);
-    margin-bottom: 1rem;
-    font-family: 'Brush Script MT', cursive, sans-serif;
-  }
-
-  /* Heart container */
-  .heart-container {
-    width: 500px;
-    height: 180px;
-    margin: 0 auto;
-    animation: pulse 2.5s infinite ease-in-out;
-  }
-
-  /* Heart SVG styling */
-  svg.heart {
-    width: 100%;
-    height: 100%;
-    fill: url(#heartGradient);
-    filter: drop-shadow(0 0 6px var(--red-velvet-light));
-  }
-
-  /* Heart pulse animation */
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-      filter: drop-shadow(0 0 6px var(--red-velvet-light));
-    }
-    50% {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 15px var(--glow-red));
-    }
-  }
-
-  /* Responsive text scaling */
-  @media (max-width: 600px) {
-    .birthday-text {
-      font-size: 2.5rem;
-    }
-    .heart-container {
-      width: 150px;
-      height: 135px;
-    }
-  }
-  /* Responsive heart container */
+/* Heart container */
 .heart-container {
-  width: 80%;          /* relative width */
-  max-width: 400px;    /* don’t exceed 400px */
-  height: auto;
-  aspect-ratio: 5 / 2; /* keep proportional height */
+  width: 80%;
+  max-width: 350px;
   margin: 0 auto;
+  aspect-ratio: 1 / 1; /* keeps heart proportional */
   animation: pulse 2.5s infinite ease-in-out;
 }
 
-/* Scale text responsively */
-.birthday-text {
-  font-size: clamp(1.5rem, 5vw, 3.5rem);
-  text-align: center;
-  line-height: 1.3;
-  padding: 0 10px;
-  word-break: break-word;
+/* Heart SVG */
+svg.heart {
+  width: 100%;
+  height: 100%;
+  fill: url(#heartGradient);
+  filter: drop-shadow(0 0 6px var(--red-velvet-light));
 }
 
-/* Extra small screen tweaks */
-@media (max-width: 600px) {
-  .heart-container {
-    width: 70%;
-    max-width: 250px;
-    aspect-ratio: 1 / 1; /* square-ish heart for smaller screens */
+/* Heart pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px var(--red-velvet-light));
   }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px var(--glow-red));
+  }
+}
+
+/* Small screen tweaks */
+@media (max-width: 600px) {
   .birthday-text {
-    font-size: clamp(1.2rem, 6vw, 2.5rem);
+    font-size: clamp(1.2rem, 7vw, 2.5rem);
+  }
+  .heart-container {
+    max-width: 250px;
   }
 }
 
