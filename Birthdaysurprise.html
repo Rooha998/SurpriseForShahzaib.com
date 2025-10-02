@@ -250,49 +250,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* General responsive fixes */
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-  overflow-x: hidden;
-}
-
-.card {
-  height: auto; /* let card height adjust naturally */
-  min-height: 280px;
-}
-
-/* Fix text overflow */
-.message {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-}
-
-/* Extra mobile tweaks */
-@media (max-width: 768px) {
-  .card {
-    min-height: 220px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 2rem;
-    text-align: center;
-  }
-  .subtitle {
-    font-size: 1rem;
-    text-align: center;
-  }
-}
-
     </style>
 </head>
 <body>
@@ -465,7 +422,7 @@ img, video {
                     
                 </div>
             </div>
-                    
+                        
             <!-- Card 14 -->
             <div class="card">
                 <div class="card-inner">
@@ -531,8 +488,7 @@ Every heartbeat of mine whispers your name, and today I celebrate the most preci
         </footer>
     </div>
 
-    <script>
-        // Create floating hearts background
+    <script>Create floating hearts background
         function createHearts() {
             const heartBackground = document.getElementById('heartBackground');
             const numberOfHearts = 25;
@@ -542,11 +498,7 @@ Every heartbeat of mine whispers your name, and today I celebrate the most preci
                 heart.classList.add('heart');
                 
                 // Random position
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                
-                // Random size
-                const size = Math.random() * 15 + 10;
+                const posX = Math.random() * 100;= Math.10;
                 
                 // Random animation delay
                 const delay = Math.random() * 5;
