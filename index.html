@@ -12,129 +12,134 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Norwester&display=swap" rel="stylesheet" />
   
   <style>
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body, html {
-      height: 100%;
-      font-family: 'Lato', sans-serif;
-      background: radial-gradient(ellipse at bottom, #0b0000 0%, #1a0000 70%, #000000 100%);
-      color: #ff4c4c; /* bright red */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      overflow: hidden;
-      position: relative;
-    }
-    /* Starry background container */
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    /* Single star style */
-    .star {
-      position: absolute;
-      background: #ff4c4c;
-      border-radius: 50%;
-      opacity: 0.8;
-      box-shadow: 0 0 6px 2px #ff0000;
-      animation: twinkle 2s infinite alternate;
-    }
-    /* Different star sizes and animation delays */
-    .star.small {
-      width: 2px;
-      height: 2px;
-      animation-duration: 1.5s;
-    }
-    .star.medium {
-      width: 3px;
-      height: 3px;
-      animation-duration: 2.5s;
-    }
-    .star.large {
-      width: 4px;
-      height: 4px;
-      animation-duration: 3s;
-    }
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
-    .container {
-  width: 100%;
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-}
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body, html {
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    background: radial-gradient(ellipse at bottom, #0b0000 0%, #1a0000 70%, #000000 100%);
+    color: #ff4c4c; /* bright red */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden; /* prevent horizontal scroll */
+    position: relative;
+  }
 
+  /* Starry background container */
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    .container {
-      max-width: 500px;
-      background: rgba(30, 0, 0, 0.85); /* dark red transparent */
-      border-radius: 15px;
-      padding: 40px 30px;
-      box-shadow: 0 0 20px #ff0000;
-      position: relative;
-      z-index: 1;
-    }
-    h1 {
-      font-family: 'Norwester', sans-serif;
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #ff4c4c;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 0 8px #ff0000;
-    }
-    p.subtitle {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #ff9999;
-      text-shadow: 0 0 5px #ff4c4c;
-    }
+  .star {
+    position: absolute;
+    background: #ff4c4c;
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: 0 0 6px 2px #ff0000;
+    animation: twinkle 2s infinite alternate;
+  }
+  .star.small { width: 2px; height: 2px; animation-duration: 1.5s; }
+  .star.medium { width: 3px; height: 3px; animation-duration: 2.5s; }
+  .star.large { width: 4px; height: 4px; animation-duration: 3s; }
+
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+
+  .container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(30, 0, 0, 0.85);
+    border-radius: 15px;
+    padding: 40px 20px;
+    box-shadow: 0 0 20px #ff0000;
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-family: 'Norwester', sans-serif;
+    font-size: clamp(2rem, 6vw, 3rem); /* responsive size */
+    margin-bottom: 15px;
+    color: #ff4c4c;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px #ff0000;
+  }
+
+  p.subtitle {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 30px;
+    color: #ff9999;
+    text-shadow: 0 0 5px #ff4c4c;
+  }
+
+  .countdown {
+    display: flex;
+    flex-wrap: wrap; /* allow wrap on small screens */
+    justify-content: space-around;
+    font-weight: 700;
+    gap: 10px;
+  }
+
+  .countdown div {
+    flex: 1 1 100px; /* responsive boxes */
+    min-width: 90px;
+    background: #330000;
+    border-radius: 10px;
+    padding: 15px 10px;
+    box-shadow: 0 0 10px #ff0000;
+  }
+
+  .countdown div span.number {
+    display: block;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: #ff4c4c;
+    text-shadow: 0 0 6px #ff0000;
+  }
+
+  .countdown div span.label {
+    font-size: 0.9rem;
+    color: #ff9999;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 4px #ff4c4c;
+  }
+
+  footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ff6666;
+    text-shadow: 0 0 3px #ff0000;
+  }
+
+  /* Extra small screen tweaks */
+  @media (max-width: 480px) {
     .countdown {
-      display: flex;
-      justify-content: space-around;
-      font-weight: 700;
+      flex-direction: column;
+      align-items: center;
     }
     .countdown div {
-      flex: 1;
-      margin: 0 10px;
-      background: #330000;
-      border-radius: 10px;
-      padding: 20px 10px;
-      box-shadow: 0 0 10px #ff0000;
+      width: 100%;
+      max-width: 200px;
     }
-    .countdown div span.number {
-      display: block;
-      font-size: 3rem;
-      color: #ff4c4c;
-      text-shadow: 0 0 6px #ff0000;
-    }
-    .countdown div span.label {
-      font-size: 1rem;
-      color: #ff9999;
-      margin-top: 5px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 4px #ff4c4c;
-    }
-    footer {
-      margin-top: 30px;
-      font-size: 0.9rem;
-      color: #ff6666;
-      text-shadow: 0 0 3px #ff0000;
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body>
   <!-- Starry background container -->
