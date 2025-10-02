@@ -250,6 +250,49 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* General responsive fixes */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.card {
+  height: auto; /* let card height adjust naturally */
+  min-height: 280px;
+}
+
+/* Fix text overflow */
+.message {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Extra mobile tweaks */
+@media (max-width: 768px) {
+  .card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .subtitle {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
     </style>
 </head>
 <body>
