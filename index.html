@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Norwester&display=swap" rel="stylesheet" />
   
   <style>
-   /* Reset and base */
+/* Reset and base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -152,52 +152,106 @@ footer {
     </div>
     <footer>Every tick is a heartbeat of love for you ❤️</footer>
   </div>
+<script>
+  // 🌟 Record page load time
+  const pageLoadedAt = new Date();
 
-  <script>
-    // Generate stars dynamically
-    const starsContainer = document.querySelector('.stars');
-    const starCount = 100;
+  // 🌟 Star background
+  const starsContainer = document.querySelector('.stars');
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const sizeClass = ['small', 'medium', 'large'][Math.floor(Math.random() * 3)];
+    star.classList.add(sizeClass);
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.animationDelay = (Math.random() * 3) + 's';
+    starsContainer.appendChild(star);
+  }
 
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      // Random size class
-      const sizeClass = ['small', 'medium', 'large'][Math.floor(Math.random() * 3)];
-      star.classList.add(sizeClass);
-      // Random position
-      star.style.top = Math.random() * 100 + 'vh';
-      star.style.left = Math.random() * 100 + 'vw';
-      // Random animation delay for twinkle effect
-      star.style.animationDelay = (Math.random() * 3) + 's';
-      starsContainer.appendChild(star);
+  // 🎂 Countdown target date (change if needed for testing)
+  const targetDate = new Date('2025-10-07T00:00:00');
+
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  const container = document.querySelector('.container');
+
+  // 🩷 Function: show 0000 and click message
+  function showClickToContinue() {
+    daysEl.textContent = '0';
+    hoursEl.textContent = '00';
+    minutesEl.textContent = '00';
+    secondsEl.textContent = '00';
+
+    if (!document.getElementById('click-msg')) {
+      const msg = document.createElement('p');
+      msg.id = 'click-msg';
+      msg.textContent = '🎉 Birthday has passed! Click anywhere to open your surprise ❤️';
+      msg.style.color = '#ff9999';
+      msg.style.marginTop = '20px';
+      msg.style.fontSize = '1rem';
+      msg.style.textShadow = '0 0 5px #ff4c4c';
+      container.appendChild(msg);
     }
 
-    // Countdown script (unchanged)
-    const birthdayDate = new Date('2025-10-07T00:00:00');
+    // Attach reliable single-use click listener
+    document.addEventListener(
+      'click',
+      () => window.location.href = 'surprise.html',
+      { once: true }
+    );
+  }
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = birthdayDate - now;
+  // 👇 Declare timer variable before using
+  let timer = null;
 
-      if (diff <= 0) {
-        clearInterval(timerInterval);
-        window.location.replace("surprise.html");
-        return;
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    // Time’s up or passed
+    if (diff <= 0) {
+      if (timer) clearInterval(timer);
+
+      // Check if page opened before target (then auto redirect)
+      const pageOpenedBeforeTarget = pageLoadedAt < targetDate;
+
+      if (pageOpenedBeforeTarget) {
+        // Countdown reached zero in real-time
+        window.location.replace('surprise.html');
+      } else {
+        // Page opened after birthday passed
+        showClickToContinue();
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      return;
     }
 
-    updateCountdown();
-    const timerInterval = setInterval(updateCountdown, 1000);
-  </script>
+    // Otherwise update countdown normally
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = days;
+    hoursEl.textContent = hours.toString().padStart(2, '0');
+    minutesEl.textContent = minutes.toString().padStart(2, '0');
+    secondsEl.textContent = seconds.toString().padStart(2, '0');
+  }
+
+  // ✅ Start countdown safely after function definition
+  updateCountdown();
+  timer = setInterval(updateCountdown, 1000);
+
+  // ✅ If opened after time passed, show click option immediately
+  window.addEventListener('load', () => {
+    const now = new Date();
+    if (targetDate - now <= 0) {
+      showClickToContinue();
+    }
+  });
+</script>
+
 </body>
 </html>
